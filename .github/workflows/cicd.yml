@@ -16,15 +16,16 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "export"
-  List_artifacts_from_IDMC_Test_Project:
+  IICS_CLI_Steps:
     # The type of runner that the job will run on
     runs-on: windows-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+    
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
-      - name: Run IICS CLI Tool
-        run: iics_cli/iics.exe list -u ckoch -p u_Z20PrJgddr -r em -q "location==Test"
+      - name: List Artifacts
+        run: iics_cli/iics.exe list -u ${{ secrets.IICS_USER}} -p ${{ secrets.IICS_PW}} -r em -q "location==Test"
