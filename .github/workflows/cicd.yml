@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: IICS CLI Test
 
 # Controls when the workflow will run
 on:
@@ -29,3 +29,5 @@ jobs:
       # Runs a single command using the runners shell
       - name: List Artifacts
         run: iics_cli/iics.exe list -u ${{ secrets.IICS_USER}} -p ${{ secrets.IICS_PW}} -r em -q "location==Test"
+      - name: Export Artifacts
+        run: iics_cli/iics.exe export -u ${{ secrets.IICS_USER}} -p ${{ secrets.IICS_PW}} -r em -n export_test -a Test.PROJECT -z zipfile.zip
