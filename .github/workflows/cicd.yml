@@ -12,6 +12,18 @@ on:
   
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    inputs:
+      name:
+        type: choice
+        description: Who to greet
+        options: 
+        - monalisa
+        - cschleiden
+      message:
+        required: true
+      use-emoji:
+        type: boolean
+        description: Include 🎉🤣 emojis
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -25,7 +37,8 @@ jobs:
     
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
+      - name: Test Echo with input
+        run: echo "${{ github.event.inputs.message }} ${{ github.event.inputs.name }}"
       # Runs a single command using the runners shell
       - name: List Artifacts
         run: iics_cli/iics.exe list -u ${{ secrets.IICS_USER}} -p ${{ secrets.IICS_PW}} -r em -q "location==Test"
